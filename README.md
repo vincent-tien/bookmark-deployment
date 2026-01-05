@@ -13,6 +13,29 @@ The deployment consists of four main containers orchestrated via `docker-compose
 | **Backend** | `bmk-bookmark-service`| `vincenttien/bookmark-service:dev`| Core API service. |
 | **Redis** | `bmk-redis` | `redis:alpine` | Caching layer for the backend. |
 
+```mermaid
+graph TD
+    User["User / Internet"]
+
+    subgraph Bookmark_Development["Bookmark Development"]
+        Nginx["bmk-nginx<br/>Reverse Proxy"]
+        Portal["bmk-portal<br/>Frontend"]
+        Backend["bmk-bookmark-service<br/>Backend API"]
+        Redis["bmk-redis<br/>Cache"]
+    end
+
+    %% Traffic Flow
+    User -->|Port 80| Nginx
+    Nginx --> Portal
+    Nginx --> Backend
+    Portal -->|Internal Network| Backend
+    Backend -->|Internal Network| Redis
+
+    %% Styling
+    classDef container fill:#be6725,stroke:#333,stroke-width:2px;
+    class Nginx,Portal,Backend,Redis container;
+```
+
 ## 📂 Project Structure
 
 ```text
