@@ -1,0 +1,26 @@
+services:
+  redis:
+    image: redis:alpine
+    container_name: bmk-redis
+  bookmark_service:
+    image: vincenttien/bookmark-service:dev
+    container_name: bmk-bookmark-service
+    restart: always
+    depends_on:
+      - redis
+    env_file: ./services/bookmark_service/.env
+  portal:
+    image: ebvn/bookmark-app-portal:dev
+    container_name: bmk-portal
+    restart: always
+    depends_on:
+      - bookmark_service
+  nginx:
+    image: nginx:alpine
+    container_name: bmk-nginx
+    depends_on:
+      - bookmark_service
+    ports:
+      - "80:80"
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
