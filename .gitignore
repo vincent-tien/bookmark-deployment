@@ -32,3 +32,4 @@ temp/
 *.local.yaml
 *.local.yml
 config.local.*
+/data/
