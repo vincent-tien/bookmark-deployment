@@ -34,4 +34,6 @@ temp/
 config.local.*
 /data/
 .env
-/data/postgres/
+# Postgres data (must never be committed)
+data/postgres/
+data/postgres/**
