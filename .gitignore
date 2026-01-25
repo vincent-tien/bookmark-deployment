@@ -34,3 +34,4 @@ temp/
 config.local.*
 /data/
 .env
+/data/postgres/
