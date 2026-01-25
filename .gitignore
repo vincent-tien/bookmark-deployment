@@ -33,3 +33,4 @@ temp/
 *.local.yml
 config.local.*
 /data/
+.env
